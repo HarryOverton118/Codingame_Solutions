@@ -1,0 +1,22 @@
+#gets inputs
+n = int(input())
+
+#sets array of horses
+pi= [0] * n
+
+
+#imputs strengths of each horse
+for i in range(n):
+    pi[i] = int(input())
+
+#sorts horses buy accending order
+pi.sort()
+
+#sets differnce to the max possible power of a hourse 
+d = 10000000
+
+#checks if the current smallest differnce is smaller than the current two horses before moving on to the next 2 hourses
+for i in range (1, n):
+    d = min(d,pi[i] - pi[i-1])
+
+print(d)
