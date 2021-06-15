@@ -1,0 +1,33 @@
+import sys
+import math
+
+temps = []
+
+n = int(input())  # the number of temperatures to analyse
+for i in input().split():
+    # t: a temperature expressed as an integer ranging from -273 to 5526
+    t = int(i)
+    temps.append(t)
+
+#if the list is empty it clostet temp is zero otherwise the closest temp is the highest possible temp
+if not temps:
+    result = 0
+else:
+    result = 5526
+
+#compares the absolute integers of each temperature, setting the result to the smallest (closet to 0)
+for i in range (n):
+    if temps[i] != 0:
+        for i in range (0, n):
+            #result = min (result, abs(temps[i]))
+            if abs(result) > abs(temps[i]):
+                result = temps[i]
+            # if two temps are equally as close the positive temp is chosen
+            elif abs(result) == abs(temps[i]):
+                result = max(result, temps[i])
+    else:
+        result = 0
+    
+
+
+print(result)
