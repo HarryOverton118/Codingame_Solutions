@@ -1,0 +1,25 @@
+import sys
+import math
+
+# Auto-generated code below aims at helping you parse
+# the standard input according to the problem statement.
+
+values = []
+p = 0 #max loss
+
+n = int(input())
+for i in input().split():
+    v = int(i)
+    values.append(v)
+
+
+for i in range(len(values)):
+    if p  < values[i]:
+        for x in range(i+1, len(values)):
+            loss = values[i] - values[x]
+            if loss > p:
+                p = loss
+               
+    
+
+print(-p)
