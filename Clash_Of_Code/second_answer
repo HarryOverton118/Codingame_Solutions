@@ -1,0 +1,7 @@
+c=0
+a=[]
+for x in input():
+ if x=="#":c+=1
+ elif c!=0:a.append(c);c=0
+if c!=0:a.append(c)
+print(*a)
