@@ -17,12 +17,54 @@ nb_floors, width, nb_rounds, exit_floor, exit_pos, nb_total_clones, nb_additiona
 #create a dictionary to store the floor numebr as keys and their elevators positions as the values in the key:value pairs
 dict_elevator = dict()
 
+def find_closest_elevator(dict_elevator, pos, floor):
+    closest = 999999
+    key_list = list(dict_elevator[floor])
+    for i in key_list:
+        result = abs(pos - dict_elevator[floor][i])
+        if closest > result:
+            closest = result
+            closest_pos = dict_elevator[floor][i]
+    return closest_pos
+    
+def move_closest_elevator(closest, pos, dir):
+    if pos > (closest - 1) and dir == "RIGHT":
+        print("BLOCK")
+    elif pos < (closest +1) and dir == "LEFT":
+        print("BLOCK")
+    else:
+        print("WAIT")
+
+
+
+
 
 for i in range(nb_elevators):
     # elevator_floor: floor on which this elevator is found
     # elevator_pos: position of the elevator on its floor
     elevator_floor, elevator_pos = [int(j) for j in input().split()]
-    dict_elevator[elevator_floor] = elevator_pos
+
+    # checks to see if there is already an elevator documented on that floor
+    if elevator_floor not in dict_elevator:
+        dict_elevator[elevator_floor] = {}   #creates a nested dict for that floor
+    key_list = list(dict_elevator[elevator_floor]) #sets the indexing for the values in the floor
+    if not key_list:
+        e = 1       #if there is no elevator on the floor the index is set to 1
+    else:
+        e = key_list[-1] + 1 #otherwise the index if +1 the last value
+    dict_elevator[elevator_floor][e] = elevator_pos
+
+
+
+#print(dict_elevator)
+
+
+
+
+
+
+
+
 
 # game loop
 while True:
@@ -30,22 +72,13 @@ while True:
     clone_floor = int(inputs[0])  # floor of the leading clone
     clone_pos = int(inputs[1])  # position of the leading clone on its floor
     direction = inputs[2]  # direction of the leading clone: LEFT or RIGHT
-    
-
-    if clone_floor in dict_elevator.keys():  #if the clone is not on a floor in the dictionary it must be on the exit floor
-        if dict_elevator[clone_floor] > clone_pos and direction == "LEFT":  #checks if the clone is mooving away form the elevator position on its floor
-            print("BLOCK")
-        elif dict_elevator[clone_floor] < clone_pos and direction == "RIGHT": #checks if the clone is mooving away form the elevator position on its floor
-            print("BLOCK")
+    if clone_floor in dict_elevator.keys():
+        if len(dict_elevator[clone_floor]) > 1:
+            closest = find_closest_elevator(dict_elevator, clone_floor, clone_pos)
         else:
-            print("WAIT")
-    elif clone_floor != exit_floor and nb_additional_elevators > 0:   #if an elevator is not pressent and we are not on the exit floor we buld an elevator thena dd the floor to the dict
-        print("ELEVATOR")
-        dict_elevator[clone_floor] = clone_pos
+            closest = dict_elevator[elevator_floor][1]
+        action = move_closest_elevator(closest, clone_pos, direction)
+    elif clone_floor == -1:
+        print("WAIT")
     else:
-        if exit_pos > clone_pos and direction == "LEFT": #checks if the clone is mooving away form the exit position on its floor
-            print("BLOCK")
-        elif exit_pos < clone_pos and direction == "RIGHT": #checks if the clone is mooving away form the exit position on its floor
-            print("BLOCK")
-        else:
-            print("WAIT")
+        action = build_elevator()
