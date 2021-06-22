@@ -1,0 +1,21 @@
+import sys
+import math
+
+# Auto-generated code below aims at helping you parse
+# the standard input according to the problem statement.
+b = input()
+seq = list()
+seq = b.split("0") # splits the string into a list split where there is a 0 
+# for example  101100111101 would be:
+#["1", "11", "", "1111", "1"]
+
+most = 0
+
+#here we can then simply compare the greatest values of the lengths of each element when combined with the next element
+for i in range (0, len(seq)-1):
+    result = len(seq[i]) + len(seq[i+1]) +1
+    if result > most:
+        most = result
+
+print(most)
+    
