@@ -7,28 +7,24 @@ network = dict()
 network = defaultdict(list)
 gateway = list()
 
+level = 0
 visited = []
 queue = []
 
-
-def bfs(visited, network, node, gateway):
-    visited.append(node)
-    queue.append(node)
-
-    while queue:
-        s = queue.pop(0)
-        g = set(gateway) & set(network[s])
-        #print(g, end=" ")
-        is_empty = g == set()
-
-        if not is_empty:
-            del network[s][0]
-            return(str(list(g)[0])+ " " + str(s))
-        else:
-            for neighbor in network[s]:
-                if neighbor not in visited:
-                    visited.append(neighbor)
-                    queue.append(neighbor)
+def block_link(visited, network, node, gateway):
+    # checks to see if agent is next to any gateways
+    g = set(gateway) & set(network[node])
+    is_empty = g == set()
+    
+    #blocks links that will lead the agent straight to a gateway
+    if not is_empty:
+        return(str(list(g)[0]) + " " + str(node))
+    
+    #if there is no imediate threat other links will be blocked
+    for x in range (0, len(gateway)):
+        if len(network[i]) > 0:
+            return(str(i) + " " + str(network[i][0]))
+        
 
 
 
@@ -55,5 +51,6 @@ while True:
 
 
     # Example: 0 1 are the indices of the nodes you wish to sever the link between
-    link = (bfs(visited, network, si, gateway))
+    link = (block_link(visited, network, si, gateway))
     print(link)
+
