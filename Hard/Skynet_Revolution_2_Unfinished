@@ -9,7 +9,7 @@ gateway = list()
 visited = []
 queue = []
         
-
+#performs a bfs to create a map of nodes connected to gateways
 def bfs(visited, network, node, gateway):
     visited.append(node)
     queue.append(node)
@@ -30,7 +30,7 @@ def bfs(visited, network, node, gateway):
     return connected_nodes
 
 
-
+#performs a bfs to calculate the shortest path
 def bfs_shortest_path(network, start, end):
     explored = []
     queue = [[start]]
@@ -71,7 +71,6 @@ dist_gateway = [500] * len(network)
 
 shortest = 500
 shortest_path = []
-no_danger = True
 
 # game loop
 while True:
@@ -82,33 +81,36 @@ while True:
 
 
     # Example: 0 1 are the indices of the nodes you wish to sever the link between
-    
+    no_danger = True
 
-    nodes = bfs(visited, network, si, gateway)
 
     for i in range(0, len(gateway)):
         path = bfs_shortest_path(network, si, gateway[i])
-        connected_nodes = bfs(visited, network, si, gateway)
-        dist_gateway[i] = len(path)
+        nodes = bfs(visited, network, si, gateway)
+        print(nodes)
 
-        if len(path) == len(connected_nodes):
+        
+        
+        #dist_gateway[i] = len(path)
+        current_gateway = path[-2]
+        
+        if len(path) - 1 == len(nodes[current_gateway]):
             a = path[-1]
             b = path[-2]
-
-            print(a, b)
-            del network[a][network[a].index(b)]
-            del network[b][network[b].index(a)]
+            network[a].remove(b)
+            network[b].remove(a)
             no_danger = False
+            print(a, b)
+
         elif len(path) < shortest:
             shortest = len(path)
             shortest_path = path
-            no_danger = True
 
 
     if no_danger == True:
         a = shortest_path[-1]
         b = shortest_path[-2]
+        network[a].remove(b)
+        network[b].remove(a)
 
         print(a, b)
-        del network[a][network[a].index(b)]
-        del network[b][network[b].index(a)]
