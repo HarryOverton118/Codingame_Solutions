@@ -1,0 +1,56 @@
+import sys
+import math
+
+# init map
+grid = []
+queue_path = []
+queue_start = []
+visited_path = []
+visited_start = []
+# directional vectors to search each adjecent cell in the map
+
+
+for i in range(10):
+    row = input()
+    grid.insert(i, row)
+
+
+#bfs searches for the starting point
+def bfs_start(grid, start):
+    queue_start=[[start]]
+
+    while queue_start:
+        cell = queue_start.pop(0)
+        x, y = cell[-1]
+        if grid[y][x] == "C": #if the cell is "C" it reyturns the cords for the starting point
+            return x, y
+        
+        for x2, y2 in ((x+1,y), (x-1, y), (x, y+1), (x, y-1)):
+            if 0 <= x2 < 10 and 0 <= y2 < 10 and (x2, y2) not in visited_path:
+                queue_start.append(cell + [(x2, y2)])
+                visited_start.append((x2, y2))
+        
+#bfs searches for the fastest path to the goal
+def bfs_path(grid, start):
+    queue_path=[[start]]
+
+    while queue_path:
+        path = queue_path.pop(0)
+        
+        x, y = path[-1]
+        if grid[y][x] == "M":
+            return path
+    
+        #check all adjacent cells that are possible to traverse
+        for x2, y2 in ((x+1,y), (x-1, y), (x, y+1), (x, y-1)):
+            if 0 <= x2 < 10 and 0<= y2 < 10 and grid[y2][x2] != "#" and (x2, y2) not in visited_path:
+                queue_path.append(path + [(x2, y2)]) #
+                visited_path.append((x2, y2))
+
+#calls bfs function to find starting point
+start = bfs_start(grid, (0, 0))
+
+#calls bfs function to find shortest path
+path = bfs_path(grid, start)
+
+print((len(path)-1) * 10, "km", sep ='')
