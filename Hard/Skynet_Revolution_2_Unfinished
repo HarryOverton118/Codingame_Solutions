@@ -87,7 +87,7 @@ while True:
     for i in range(0, len(gateway)):
         path = bfs_shortest_path(network, si, gateway[i])
         nodes = bfs(visited, network, si, gateway)
-        print(nodes)
+        #print(nodes)
 
         
         
@@ -114,3 +114,4 @@ while True:
         network[b].remove(a)
 
         print(a, b)
+
