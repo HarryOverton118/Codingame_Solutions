@@ -1,8 +1,14 @@
 -- Auto-generated code below aims at helping you parse
+-- Auto-generated code below aims at helping you parse
 -- the standard input according to the problem statement.
 grid = {}
 queue_start = {}
 visited_start = {}
+
+--direction vectors
+d_row = {-1, 0, 1, 0}
+d_col = {0, 1, 0, -1}
+
 
 max_rows = 10
 max_cols = 10
@@ -12,11 +18,29 @@ for i=0,10-1 do
     input = io.read()
     row = {}
     grid[i] = {}
-    
+
     for j in string.gmatch(input, ".") do
         table.insert(grid[i], j)
     end
 end
+
+
+-- function to check if element is in table
+function set_contains(table, key)
+    return table[key] ~= nil
+end
+
+-- function to check if next cell in bfs is valid
+function is_valid(table, row, col)
+    if row < 0 or col < 0 or row >= 10 or col>=10 then
+        return false
+    elseif set_contains(table,{row, col}) then
+        return true
+    else
+        return false
+    end
+end
+
 
 
 
@@ -26,15 +50,21 @@ function bfs_start(grid, start)
 
     while queue_start do
         cell = table.remove(queue_start, 1)
-        x, y =  cell{-1}
+        x, y =  cell[-1]
         if grid[y][x] == "C" then
             return x, y
         end
 
-        for i
-            
-        end
+        for i=0, 4 do
+            adjx = x + d_row[i]
+            adjy = y + d_col[i]
+            valid = is_valid(visited_start, adjx, adjy)
 
+            if valid then
+                table.insert(queue_start, {adjx, adjy})
+                table.insert(visited_start, {adjx, adjy} )
+            end
+        end
     end
 end
 
@@ -47,3 +77,7 @@ function print_table(table, col, rol)
         io.write("\n")
     end
 end
+
+
+--get starting point
+print(bfs_start(grid, {0, 0}))
