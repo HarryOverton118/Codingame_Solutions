@@ -1,0 +1,49 @@
+-- Auto-generated code below aims at helping you parse
+-- the standard input according to the problem statement.
+grid = {}
+queue_start = {}
+visited_start = {}
+
+max_rows = 10
+max_cols = 10
+
+
+for i=0,10-1 do
+    input = io.read()
+    row = {}
+    grid[i] = {}
+    
+    for j in string.gmatch(input, ".") do
+        table.insert(grid[i], j)
+    end
+end
+
+
+
+
+function bfs_start(grid, start)
+    queue_start={{start}}
+
+    while queue_start do
+        cell = table.remove(queue_start, 1)
+        x, y =  cell{-1}
+        if grid[y][x] == "C" then
+            return x, y
+        end
+
+        for i
+            
+        end
+
+    end
+end
+
+--functions writes table to show readable grid for testing
+function print_table(table, col, rol)
+    for x=0, col  do
+        for z=1, rol do
+            io.write(grid[x][z])
+        end
+        io.write("\n")
+    end
+end
