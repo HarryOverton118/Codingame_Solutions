@@ -1,0 +1,26 @@
+-- Auto-generated code below aims at helping you parse
+-- the standard input according to the problem statement.
+
+N = tonumber(io.read())
+
+-- set array of horses
+pi = {}
+
+for i=0,N-1 do
+    Pi = tonumber(io.read())
+    table.insert(pi, Pi)
+end
+
+-- sorts horses by accending order
+table.sort(pi)
+
+-- sets difference to the max possible power of the horse
+d = 10000000
+
+--checks if the current smallest differnce is smaller than the current two horses before moving on to the next 2 hourses
+for i=2,N do
+    c= (pi[i] - pi[i-1])
+    d = math.min(d, c)
+end
+
+print(d)
