@@ -1,0 +1,88 @@
+import sys
+import math
+
+#set point values
+points = dict()
+points["e"] = 1
+points["a"] = 1
+points["i"] = 1
+points["o"] = 1
+points["n"] = 1
+points["r"] = 1
+points["t"] = 1
+points["l"] = 1
+points["s"] = 1
+points["u"] = 1
+
+points["d"] = 2
+points["g"] = 2
+
+points["b"] = 3
+points["c"] = 3
+points["m"] = 3
+points["p"] = 3
+
+points["f"] = 4
+points["h"] = 4
+points["v"] = 4
+points["w"] = 4
+points["y"] = 4
+
+points["k"] = 5
+
+points["j"] = 8
+points["x"] = 8
+
+points["q"] = 10
+points["z"] = 10
+
+words = []
+possible_words = []
+
+
+
+
+
+
+
+
+# Auto-generated code below aims at helping you parse
+# the standard input according to the problem statement.
+
+n = int(input())
+for i in range(n):
+    w = input()
+    words.insert(i, w)
+letters = input()
+letter_list = list(letters)
+
+# finds the possible words by comparing the words to our letters
+# removes each letter it finds from the letters string to stop reusing letters
+for i in range(len(words)):
+    matched_list = []
+    new_letters = letters
+    for j in range(len(words[i])):
+        if words[i][j] in new_letters:
+            matched_list.insert(j, True)
+            new_letters = new_letters.replace(words[i][j], '', 1)
+        else:
+            matched_list.insert(j, False)
+    if all(matched_list):
+        possible_words.insert(i, words[i])
+
+
+# finds the best scoring word out of the posibilities by comparing each words chars to the points dictionary
+best_word = ""
+best_score = 0
+for i in range(len(possible_words)):
+    score = 0
+    for j in range(len(possible_words[i])):
+        char = possible_words[i][j]
+        score += points[char]
+
+        if score > best_score:
+            best_score = score
+            best_word = possible_words[i]
+
+  
+print(best_word)
