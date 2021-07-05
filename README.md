@@ -23,8 +23,8 @@ I have found that codingame has been a great way to learn to code and would reco
 - [The Lost Child Episode 1](https://github.com/HarryOverton118/Python_codingGame/blob/main/Medium/The_Lost_Child_1) *[2D array, BFS, Pathfinding]*
 
 ### Hard
-- [Dont Panic Episode 2 Incomplete (40%)](https://github.com/HarryOverton118/Python_codingGame/blob/main/Hard/Dont_Panic_2_incomplete)
-- [Skynet Revolution 2 Incomplete](https://github.com/HarryOverton118/Python_codingGame/blob/main/Hard/Skynet_Revolution_2_Unfinished)
+- [Dont Panic Episode 2 Incomplete (40%)](https://github.com/HarryOverton118/Python_codingGame/blob/main/Hard/Dont_Panic_2_incomplete) *[Pathfinding]*
+- [Skynet Revolution 2 Incomplete](https://github.com/HarryOverton118/Python_codingGame/blob/main/Hard/Skynet_Revolution_2_Unfinished) *[Pathfinding, Graphs]*
 
 ## Lua
 ### Easy
