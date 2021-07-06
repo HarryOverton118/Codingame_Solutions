@@ -1,0 +1,15 @@
+import sys
+import math
+
+n = int(input())
+for i in range(n):
+    line = input()
+    drops = 0
+    while line != "":
+        if line[0] == ".":
+            line = line[1:] # no line so we discard line[0]
+        else:
+            line = line[3:] # if theres a fire we remove the next three indicies to remove the most fires possible
+            drops += 1
+    
+    print(drops)
