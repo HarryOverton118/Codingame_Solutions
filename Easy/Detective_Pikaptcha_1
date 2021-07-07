@@ -1,0 +1,37 @@
+import sys
+import math
+
+grid = []
+
+def check_adj(y, x):
+    passable = 0
+    
+    #left cell
+    if x > 0 and grid[y][x-1] == "0":
+        passable += 1
+    # right cell
+    if x < width - 1 and grid[y][x+1] == "0":
+        passable += 1
+    # top cell
+    if y > 0 and grid[y-1][x] == "0":
+        passable += 1
+    # bottom cell
+    if y < height - 1 and grid[y+1][x] == "0":
+        passable +=1
+    return passable
+
+width, height = [int(i) for i in input().split()]
+
+for i in range(height):
+    line = input()
+    grid.append(line)
+
+for y in range(height):
+    answer = ""
+    for x in range(width):
+        if grid[y][x] != "#":
+            answer += str(check_adj(y,x))
+        else:
+            answer += "#"
+
+    print(answer)
