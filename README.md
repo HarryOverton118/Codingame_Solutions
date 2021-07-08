@@ -10,7 +10,7 @@ I have found that codingame has been a great way to learn to code and would reco
 - [1D_Bush_Fire](https://github.com/HarryOverton118/Codingame_Solutions/blob/main/Easy/1D_Bush_Fire)
 - [Create the Longest Sequence of 1s](https://github.com/HarryOverton118/Python_codingGame/blob/main/Easy/Create_the_longest_sequence_of_1s) *[String Manipulation]*
 - [Decent](https://github.com/HarryOverton118/Python_codingGame/blob/main/Easy/Decent) *[Loops]*
-- [Detective_Pikaptcha_1](https://github.com/HarryOverton118/Codingame_Solutions/blob/main/Easy/Detective_Pikaptcha_1) *[Maze]*
+- [Detective Pikaptcha 1](https://github.com/HarryOverton118/Codingame_Solutions/blob/main/Easy/Detective_Pikaptcha_1) *[Maze]*
 - [Horse Racing Duals](https://github.com/HarryOverton118/Python_codingGame/blob/main/Easy/Horse_Racing_Duals) *[Loops]*
 - [Mars Lander Episode 1](https://github.com/HarryOverton118/Python_codingGame/blob/main/Easy/Mars_Lander_1) *[Conditions]*
 - [Onboarding](https://github.com/HarryOverton118/Python_codingGame/blob/main/Easy/Onboarding) *[Conditions]*
