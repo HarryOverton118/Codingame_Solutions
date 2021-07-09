@@ -1,0 +1,4 @@
+###task: calculate the compound intrest where n=borrowed money i=intrest rate m=months until paid back
+i=input
+a,b,c=[int(x)for x in i().split()]
+i(int(a*(b/100+1)**c))
