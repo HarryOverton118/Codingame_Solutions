@@ -1,0 +1,23 @@
+<?php
+
+// game loop
+while (TRUE)
+{
+    $maxH = 0;
+    $maxIndex = -1;
+
+    for ($i = 0; $i < 8; $i++)
+    {
+        // $mountainH: represents the height of one mountain.
+        fscanf(STDIN, "%d", $mountainH);
+        if ($mountainH > $maxH)
+        {
+            $maxH = $mountainH;
+            $maxIndex = $i;
+        }
+        
+    }
+    echo($maxIndex);
+    echo("\n");
+}
+?>
