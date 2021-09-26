@@ -1,0 +1,36 @@
+<?php
+
+fscanf(STDIN, "%d %d %d %d", $lightX, $lightY, $initialTx, $initialTy);
+$thor_y = $initialTy;
+$thor_x = $initialTx;
+// game loop
+while (TRUE)
+{
+    fscanf(STDIN, "%d", $remainingTurns);
+    $dir = "";
+    if ($lightY < $thor_y)
+    {
+        $dir = "N";
+        $thor_y -= 1;
+       
+    } 
+    elseif ($lightY > $thor_y)
+    {
+        $dir = "S";
+        $thor_y += 1;
+    }
+
+    if ($lightX > $thor_x)
+    {
+        $dir .= "E";
+        $thor_x += 1;
+    }
+    elseif ($lightX < $thor_x)
+    {
+        $dir .= "W";
+        $thorx -= 1;
+    }
+    
+    echo $dir."\n";
+}
+?>
