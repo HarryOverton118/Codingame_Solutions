@@ -1,0 +1,22 @@
+<?php
+  fscanf(STDIN, "%d", $N);
+  
+  $powers = [];
+  for ($i = 0; $i < $N; $i++){
+    fscanf(STDIN, "%d", $pi);
+    $powers[]=$pi;
+  }
+  
+  sort($powers);
+
+  $min = 10000000;
+  for ($i = 0; $i < $N - 1; $i++)
+  {
+    $dif = $powers[$i + 1] - $powers[$i];
+    if ($dif < $min)
+    {
+        $min = $dif;
+    }
+  }
+  echo $min . "\n";
+?>
