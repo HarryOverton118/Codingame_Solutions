@@ -1,0 +1,24 @@
+declare -a list
+
+read -r N
+for (( i=0; i<$N; i++ )); do
+    read -r Pi
+    list+=($Pi)
+done
+
+#sort list numerically 
+sorted_list=( $( printf "%s\n" "${list[@]}" | sort -n ) )
+
+#sets differnce to the max possible power of a horse 
+answer=10000000
+
+# loop through sorted list finding smallest diff (stops before final element as theres nothing to compare)
+for ((i=0;i<N-1;i++)) do
+    dif=$(( ${sorted_list[$i + 1]} - ${sorted_list[$i]} ))
+    if [ $dif -lt $answer ]
+    then
+        answer=$dif
+    fi
+done
+
+echo $answer
