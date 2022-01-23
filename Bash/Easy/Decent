@@ -1,0 +1,15 @@
+# game loop
+while true; do
+    max_height=0
+    index=-1
+    for (( i=0; i<8; i++ )); do
+        # mountainH: represents the height of one mountain.
+        read -r mountainH
+        if [ $mountainH -gt $max_height ]
+        then
+            index=$i
+            max_height=$mountainH
+        fi
+    done
+    echo $index # The index of the mountain to fire on.
+done
