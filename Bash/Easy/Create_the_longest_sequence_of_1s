@@ -1,0 +1,19 @@
+# set firled sperator to 0 to convert b into array of each string of 1s
+IFS="0"
+read -r b
+c=($b)
+answer=0
+
+#loops through array seeing with elements can be concatenated for the longest sequence
+length=${#c[@]}
+for ((i=0;i<length;i++)) do
+    result=${c[$i]}1${c[$i+1]}
+    if [ $((${#result} > $answer)) ]
+    then
+        answer=${#result} 
+    fi
+done
+
+#reset field seperator
+IFS=
+echo $answer
