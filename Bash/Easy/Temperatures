@@ -1,0 +1,33 @@
+declare -a temps
+# n: the number of temperatures to analyse
+read -r n
+read -r -a myArray
+for (( i=0; i<$n; i++ )); do
+    # t: a temperature expressed as an integer ranging from -273 to 5526
+    t=${myArray[$((i))]}
+    temps+=($t)
+done
+
+if ((${#temps[@]})); then
+    result=5526
+else
+    result=0
+fi
+
+for (( i=0; i<$n; i++)); do
+    if (( ${temps[$i]} != 0 )); then
+        for (( i=0; i<$n; i++)); do
+            if (( ${result#-} > ${temps[i]#-} )); then
+                result=${temps[$i]}
+            elif (( ${result#-} == ${temps[i]#-} )); then
+                if (( ${result} < ${temps[i]} )); then
+                    result=${temps[$i]}
+                fi
+            fi
+        done
+    else
+        result=0
+    fi
+done
+
+echo $result
