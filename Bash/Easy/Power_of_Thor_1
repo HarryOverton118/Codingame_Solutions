@@ -1,0 +1,30 @@
+read -r lightX lightY initialTX initialTY
+thorY=$initialTY
+thorX=$initialTX
+
+# game loop
+while true; do
+    # remainingTurns: The remaining amount of turns Thor can move. Do not remove this line.
+    read -r remainingTurns
+    dirY=""
+    dirX=""
+    
+    if (($thorX>$lightX)); then
+        dirX="W"
+        ((thorX-=1))
+
+    elif (($thorX<$lightX)); then
+        dirX="E"
+        ((thorX+=1))
+    fi
+
+    if (($thorY>$lightY)); then
+        dirY="N"
+        ((thorY-=1))
+    elif (($thorY<$lightY)); then
+        dirY="S"
+        ((thorY+=1))
+    fi
+    # A single line providing the move to be made: N NE E SE S SW W or NW
+    echo $dirY$dirX
+done
