@@ -1,0 +1,25 @@
+import sys
+import math
+
+# Auto-generated code below aims at helping you parse
+# the standard input according to the problem statement.
+
+message = input()
+binary = ""
+for i in range(len(message)):
+    binaryChar = str(bin(ord(message[i])))[2:]
+    binaryChar = binaryChar.zfill(7)
+
+    binary+=binaryChar
+
+lastChar = " "
+encodedBits = [" 00 0", " 0 0"]
+answer = ""
+
+for i in range(len(binary)):
+    if binary[i] != lastChar:
+        lastChar = binary[i]
+        answer += encodedBits[int(lastChar)]
+    else:
+        answer += "0"
+print(answer[1:])
