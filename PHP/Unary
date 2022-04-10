@@ -1,0 +1,33 @@
+<?php
+
+$MESSAGE = stream_get_line(STDIN, 100 + 1, "\n");
+$bin = "";
+for ($i = 0; $i<strlen($MESSAGE); $i++)
+{
+    #convert message to binary
+    $binChar = decbin(ord($MESSAGE[$i]));
+    #pad left to match 7 bit ASCII
+    $binChar = str_pad($binChar, 7, "0", STR_PAD_LEFT);
+    $bin .= $binChar;
+}
+
+$lastChar = " ";
+$encodedBits = [" 00 0", " 0 0"];
+$answer = "";
+for ($i = 0; $i<strlen($bin); $i++)
+{
+    if ( $bin[$i] != $lastChar)
+    {
+        #selects initial encoded bits (00 0 for 0, 0 0 for 1)
+        $lastChar = substr($bin, $i, 1);
+        $answer .= $encodedBits[$lastChar];
+    }
+    else
+    {
+        #appends 0 until char changes
+        $answer .= "0";
+    }
+}
+#echo answer ignoring initial " "
+echo substr($answer, 1);
+?>
