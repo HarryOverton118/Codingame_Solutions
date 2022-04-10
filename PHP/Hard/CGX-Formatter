@@ -1,0 +1,80 @@
+<?php
+$cgxLines = array();
+fscanf(STDIN, "%d", $N);
+for ($i = 0; $i < $N; $i++)
+{
+    $cgxLine = stream_get_line(STDIN, 1000 + 1, "\n");
+    array_push($cgxLines, "$cgxLine");
+}
+
+function check_next_line($char, $last_char)
+{
+    if ($last_char == ')' && $char != ';' && $char != ')' && $char != '(')
+    {
+        $tmp_str .= '\n'. (($tabs * 4) * " ");
+    }
+    elseif ($last_char == '(' && $char != ")")
+    {
+        $tmp_str .= '\n'. (($tabs * 4) * " "); 
+    }
+    elseif ($last_char == ";")
+    {
+        $tmp_str .= '\n'. (($tabs * 4) * " ");
+    }
+    elseif ($last_char == "=" && $char == "(")
+    {
+        $tmp_str .= '\n'. (($tabs * 4) * " ");
+    }
+}
+$tmp_str = "";
+$tabs = 0;
+$last_char = "";
+$str_started = False;
+foreach ($cgxLines as $line)
+{
+    $line = str_split($line);
+    foreach ($line as $char)
+    {
+        if ($char == "'" && $str_started == False)
+        {
+            check_next_line($char, $last_char);
+            $str_started = True;
+            $tmp_str .= $char;
+        }
+        elseif ($char == "'" && $str_started == True)
+        {
+            $str_started == False;
+            $tmp_str .= $char;
+        }
+        elseif ($str_started == True)
+        {
+            $tmp_str .= $char;
+        }
+        elseif ($char == " ")
+        {
+            continue;
+        }
+        else
+        {
+            check_next_line($char, $last_char);
+            if ($char == "(")
+            {
+                $tmp_str .= $char;
+                $tabs += 1;
+            }
+            elseif ($char == ")")
+            {
+                $tmp_str .= '\n' . (($tabs * 4) * " ") . ")";
+                $tabs -= 1;
+            }
+            else
+            {
+                $tmp_str .= $char;
+            }
+        }
+        $last_char = $char;
+    }
+}
+
+echo $tmp_str;
+?>
