@@ -1,5 +1,10 @@
 <?php
 $cgxLines = array();
+$tmp_str = "";
+$tabs = 0;
+$last_char = "";
+$str_started = False;
+
 fscanf(STDIN, "%d", $N);
 for ($i = 0; $i < $N; $i++)
 {
@@ -9,27 +14,27 @@ for ($i = 0; $i < $N; $i++)
 
 function check_next_line($char, $last_char)
 {
+    global $tabs;
+    global $tmp_str;
     if ($last_char == ')' && $char != ';' && $char != ')' && $char != '(')
     {
-        $tmp_str .= '\n'. (($tabs * 4) * " ");
+        $tmp_str .= "\n" . str_repeat("    ", $tabs);
     }
     elseif ($last_char == '(' && $char != ")")
     {
-        $tmp_str .= '\n'. (($tabs * 4) * " "); 
+        $tmp_str .= "\n" . str_repeat("    ", $tabs);
     }
     elseif ($last_char == ";")
     {
-        $tmp_str .= '\n'. (($tabs * 4) * " ");
+        $tmp_str .= "\n" . str_repeat("    ", $tabs);
     }
     elseif ($last_char == "=" && $char == "(")
     {
-        $tmp_str .= '\n'. (($tabs * 4) * " ");
+        $tmp_str .= "\n" . str_repeat("    ", $tabs);
     }
 }
-$tmp_str = "";
-$tabs = 0;
-$last_char = "";
-$str_started = False;
+
+#print_r($cgxLines);
 foreach ($cgxLines as $line)
 {
     $line = str_split($line);
@@ -43,7 +48,7 @@ foreach ($cgxLines as $line)
         }
         elseif ($char == "'" && $str_started == True)
         {
-            $str_started == False;
+            $str_started = False;
             $tmp_str .= $char;
         }
         elseif ($str_started == True)
@@ -64,8 +69,8 @@ foreach ($cgxLines as $line)
             }
             elseif ($char == ")")
             {
-                $tmp_str .= '\n' . (($tabs * 4) * " ") . ")";
                 $tabs -= 1;
+                $tmp_str .= "\n" . str_repeat("    ", $tabs) . ")";
             }
             else
             {
@@ -77,4 +82,6 @@ foreach ($cgxLines as $line)
 }
 
 echo $tmp_str;
+
+#('key'='value')
 ?>
